@@ -1,0 +1,368 @@
+  @extends('layouts.master_login')
+  @section('title', 'register')
+  @section('content')
+
+<section class="registrationcontainer customerregister userregister">
+  <a class="homebtn" href="{{ url('/') }}"><i class="fa fa-home"></i></a>
+  <div class="maincontainer">
+    <div class="row">
+      <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-push-1 col-md-push-1">
+        <div class="wizard">
+          <div class="wizard-inner" style="display: none;">
+            <ul class="nav nav-tabs nav-tabs-normal-register" role="tablist">
+              <li role="presentation" class="disabled">
+                <a href="#Step01" data-toggle="tab" aria-controls="Step01" role="tab" title="" data-original-title="Step 1">
+                  <span class="round-tab">
+                    <i></i>
+                    <span class="tabtext">Step 1</span>
+                  </span>
+                </a>
+              </li>
+              <li role="presentation" class="active" >
+                <a href="#Step02" data-toggle="tab" aria-controls="Step02" role="tab" title="" data-original-title="Step 2">
+                  <span class="round-tab">
+                    <i></i>
+                    <span class="tabtext">Step 2</span>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="wizardformouter">
+            <form class="wizardform" method="POST" action="{{ url('/register2') }}">
+              {{ csrf_field() }}
+              <input type="hidden" name="user_id" value="{{ $user_id }}">
+              @if (session('success'))
+              <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ session('success') }}
+              </div>
+              @endif
+              @if (session('error'))
+              <div class="alert alert-danger alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ session('error') }}
+              </div>
+              @endif
+              <div class="tab-content">
+                <div class="tab-pane" role="tabpanel" id="Step02" style="display: block;">
+                  <div class="formtypebox">
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6 col-12 col-xs-12 col-lg-push-3 col-md-push-3">
+                        <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label>Customer Type *</label>
+                              <div class="groupinner">
+                                <select class="form-control" name="customer_type" required>
+                                  <option value="">Customer Type</option>
+                                  <option value="1">Hospital / Nursing Home</option>
+                                  <option value="2">Diagnostic Centre</option>
+                                  <option value="3">Dental Centre</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label>Medical Establishment Name *</label>
+                              <div class="groupinner">
+                                <input type="text" class="form-control" value="{{old('med_estb_name')}}" placeholder="Medical Establishment Name" name="med_estb_name" required>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label>GSTIN <span>(Optional)</span></label>
+                              <div class="groupinner">
+                                <input type="text" class="form-control" value="{{old('gst')}}" placeholder="GSTIN" name="gst">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label>Pin Code *</label>
+                              <div class="groupinner">
+                                <input type="text" class="form-control" value="{{old('pincode')}}" placeholder="Pin Code" name="pincode" required>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label>Address *</label>
+                              <div class="groupinner">
+                                <textarea class="form-control" placeholder="Address" name="address" required>{{old('address')}}</textarea>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <div class="groupinner">
+                                <label>Country *</label>
+                                  <input type="text" name="country" class="form-control" required>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <div class="groupinner">
+                                <label>State *</label>
+                                <input type="text" name="state" class="form-control" required>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <div class="groupinner">
+                                <label>City *</label>
+                                <input type="text" name="city" class="form-control" required>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <!--
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label>Tell us about</label>
+                              <div class="groupinner">
+                                <textarea class="form-control" placeholder="Tell us about" name="about">{{old('about')}}</textarea>
+                              </div>
+                            </div>
+                          </div>
+                          -->
+                          <!--
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label>QA test reminder</label>
+                              <div class="groupinner">
+                                <textarea class="form-control" placeholder="QA test reminder" name="reminder">{{old('reminder')}}</textarea>
+                              </div>
+                            </div>
+                          </div>
+                          -->
+                          <!--
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label>Free Support</label>
+                              <div class="groupinner">
+                                <textarea class="form-control" placeholder="Free Support" name="support">{{old('support')}}</textarea>
+                              </div>
+                            </div>
+                          </div>
+                          -->
+                          
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="formtypebtnbox">
+                    <div class="row">
+                      <div class="col-lg-10 col-md-10 col-12 col-xs-12 col-lg-push-1 col-md-push-1">
+                        <div class="formbtncontent">
+                        </div>
+                        <div class="formtypebtngroup">
+                          <button type="submit" class="nextformbtn next-step-btn3" id="step1">Create Your Account</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade signuppoup signuppoup_reg" id="AnswerModal" tabindex="-1" role="dialog" aria-labelledby="AnswerModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="poupupheading poupupheading_modal">
+              <p>Below are the some questionnaire, according to the response of client, the system will display/show the client what compliance he/she need to fulfil and also what services we offer to fulfill those compliances</p>
+              <p>What kind of activity/action you are doing and/or about to do</p>
+
+              <ol class="reg_upper_alpha">
+                <li>Operating x-ray equipment</li>
+                <li>Purchasing x-ray equipment</li>
+                <li>Changing /moving the location/position of x-ray equipment</li>
+                <li>Shutting down/closing the operation of x-ray equipment</li>
+              </ol>
+              <ol class="reg_upper_alpha reg_upper_alpha_first">
+                <li>Question for “Regulatory Compliance for operating X-Ray Equipment”
+                  <ol class="reg_number">
+                <li>Tell us where your institute is located. (next Q-2)
+                  <ol class="reg_lower_alpha">
+                  <li>pincode/city/state/address</li>
+                </ol>
+                </li>
+                <li>Do you have the branch institute? (if yes Q-3, if No Q-4)
+                  <ol class="reg_lower_alpha">
+                  <li>Yes</li>
+                  <li>No</li>
+                </ol>
+                </li>
+                <li>Tell us where your branch institute is located. (Next Q-4)
+                  <ol class="reg_lower_alpha">
+                  <li>pincode/city/state/address*</li>
+                </ol>
+                </li>
+                <li>Is your institute accredited from NABH/NABL (next Q-5)
+                  <ol class="reg_lower_alpha">
+                  <li>Yes</li>
+                  <li>No</li>
+                </ol>
+                </li>
+                <li>Tell us a few details about the equipment you have.(Next Q-6)
+                  <ol class="reg_lower_alpha">
+                  <li>Type of equipment*</li>
+                  <li>Branch where machine is operated*</li>
+                  <li>Model name</li>
+                  <li>Manufacturer</li>
+                  <li>Serial number</li>
+                </ol>
+                </li>
+                <li>Do you have a license for the operation of the following machines? (If Yes Q-7, If No Q-8)
+                  <ol class="reg_lower_latter">
+                  <li>Display the list of machines that he/she declared</li>
+                </ol>
+                  <ol class="reg_lower_alpha">
+                  <li>Yes</li>
+                  <li>No</li>
+                </ol>
+                </li>
+                <li>Tell us a few details of the license you have for the following machines.(Next Q-09)
+                  <ol class="reg_lower_alpha">
+                  <li>Select the equipment for which you have the license for operation*</li>
+                  <li>Issuance Date</li>
+                  <li>Expiry Date</li>
+                </ol>
+                </li>
+               <li>Do you have a Quality Assurance test report of the following machines? (If yes than Next Q-9 or Q-10)
+                  <ol class="reg_lower_alpha">
+                  <li>Yes</li>
+                  <li>No </li>
+                </ol>
+                </li>
+              <li>Tell us when last Quality Assurance test for the following machines were performed?(If Q-6=yes then jump to Q-15)
+                  <ol class="reg_lower_alpha">
+                  <li>Date of last QA Test performed or --months ago*</li>
+                </ol>
+               </li>
+               <li>Do you have a room shielding layout for the following machines? (Next Q-11)
+                  <ol class="reg_lower_alpha">
+                  <li>Yes</li>
+                  <li>No</li>
+                </ol>
+               </li>
+               <li>Tell us a few details about your staff working in the Radiology department (e.g. X-Ray technician/Radiologist) (Next Q-13)</li>
+               <li>Do you have the TLD Badges for these Radiation workers? (Next Q-14)
+                <ol class="reg_lower_latter">
+                  <li>Display the list of Radiation Worker</li>
+                </ol>
+                  <ol class="reg_lower_alpha">
+                  <li>Yes</li>
+                  <li>No</li>
+                </ol>
+               </li>
+               <li>Do you have these radiation protection Accessories/Instruments? (Next Q-15)
+                <ol class="reg_lower_latter">
+                  <li>List of the instrument mandatory to have</li>
+                </ol>
+                  <ol class="reg_lower_alpha">
+                  <li>Yes</li>
+                  <li>No</li>
+                </ol>
+               </li>
+               <li>Have you done recently any servicing of the following machines?
+                <ol class="reg_lower_alpha">
+                  <li>Yes</li>
+                  <li>No</li>
+                </ol>
+               </li>
+            </ol>
+                </li>
+                <li>Purchasing X-Ray Equipment
+                  <ol class="reg_number">
+                <li>Tell a few details of the equipment you are buying
+                  <ol class="reg_lower_alpha">
+                    <li>I am purchasing the New equipment/Pre-owned equipment</li>
+                    <li>For New machine
+                      <ol class="reg_lower_latter">
+                      <li>What Type of equipment you are about to buy?*
+                        <ol class="reg_number">
+                          <li>Radiography (fixed)</li>
+                          <li>Radiography (mobile)</li>
+                          <li>Radiography (portable)</li>
+                          <li>Radiography & Fluoroscopy</li>
+                          <li>C-Arm</li>
+                          <li>6.O-Arm</li>
+                          <li>Interventional Radiology</li>
+                          <li>Computed Tomography (CT-Scan)</li>
+                          <li>Mammography</li>
+                          <li>Dental Cone Beam CT</li>
+                          <li>Ortho Pantomography (OPG)</li>
+                          <li>Dental (Intra Oral)</li>
+                          <li>Dental (Hand Held)</li>
+                          <li>Bone Densitometer (BMD)</li>
+                        </ol>
+                      </li>
+                      <li>Do you have room Layout*
+                        <ol class="reg_number">
+                          <li>Yes</li>
+                          <li>No</li>
+                        </ol>
+                      </li>
+                      <li>Do you have a Copy of authenticated QA report from the earlier user*
+                        <ol class="reg_number">
+                          <li>Yes</li>
+                          <li>No</li>
+                        </ol>
+                      </li>
+                    </ol>
+                    </li>
+                  </ol>
+                </li>
+             </ol>
+                </li>
+                <li>Change in Layout
+                  <ol class="reg_number">
+                  <li>Select the equipment for which layout is to be change</li>
+                  <li>What type of changes are you supposed to do
+                    <ol class="reg_lower_alpha">
+                      <li>Layout modification in an existing facility</li>
+                      <li>Repositioning of equipment</li>
+                      <li>Relocation of equipment</li>
+                    </ol>
+                  </li>
+                </ol>
+                </li>
+                <li>Decommissioning of X-Ray Equipment
+                  <ol class="reg_number">
+                  <li>Which of the following equipment do you want to decommission
+                    <ol class="reg_lower_alpha">
+                      <li>List of the equipment</li>
+                    </ol>
+                  </li>
+                </ol>
+                </li>
+              </ol>
+
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+@endsection

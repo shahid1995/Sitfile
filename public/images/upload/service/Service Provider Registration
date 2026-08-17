@@ -1,0 +1,57 @@
+Service Provider Registration
+-------------------------------
+name, contact,
+a. Business details
+b. State/city
+c. Address
+d. GST IN mo
+e. Upload attachment -to validate the credentials, a service
+provider may need to upload a few documents as an
+attachment.
+f. Description
+g. Website URL
+h. Company Logo
+Select membership package -a list of membership packages created by the
+administrator will appear. A service provider may select a membership
+package and proceed to purchase the same. The system will redirect the
+service provider to the payment gateway to make the payment. Once the
+payment is successful, a certain “credit value” will be added to the service
+provider account
+
+
+Customer Sign up/Guest Sign up
+-----------------------------------
+1. Signup by providing the mobile no- the signup process will be a
+simple one step process. A customer must provide email to confirm
+the registration.
+2. As an alternative method, a customer can sign up using FaceBook Account
+Once the account is created, the user will receive the account activation OTP
+via email .
+Once the registration is successful, the system will generate unique User ID.
+The generated User ID will be 8 characters long and will contain
+alphanumeric code.
+
+
+
+Database Structure
+
+service_provider
+-----------------
+increments('service_id');
+string('name');
+string('contact');
+string('business_dtls');
+string('state');
+text('address');
+integer('gst_no');
+string('credential');
+text('description');
+string('site_url');
+string('company_logo');
+integer('membership_id');
+
+customer_register
+-------------------
+mobile_no
+email
+
